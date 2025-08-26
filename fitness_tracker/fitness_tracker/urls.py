@@ -22,6 +22,7 @@ from django.urls import path, include
 from rest_framework import routers
 from activities.views import UserViewSet, ActivityViewSet
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.views.generic import RedirectView
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -30,8 +31,12 @@ router.register(r'activities', ActivityViewSet, basename='activities')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include('activities.urls')),  # your API urls
     path('api/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('swagger/', include('drf_yasg.urls')),  # if using drf-yasg
+     path('', RedirectView.as_view(url='/admin/')),  # Redirect root to admin
+
 ]
 
