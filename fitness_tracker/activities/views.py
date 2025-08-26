@@ -10,6 +10,10 @@ from .permissions import IsOwner
 from django.contrib.auth.models import User
 from django_filters.rest_framework import DjangoFilterBackend
 
+
+def home(request):
+    return render(request, 'home.html')
+
 # User CRUD
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
