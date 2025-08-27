@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!!2xt@7drsg^+q(7qinrhk*5p32(0=h#+13ab#bd(3hk)kl_xf'
+SECRET_KEY = 'django-insecure-1(16h=y2mnfm*_6pyn(#0e6k6_m!es#s0(=vto9^0prw#t)ftm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,27 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'django_filters',
-    'activities',
 ]
-# Configure DRF authentication (settings.py)
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',
-        'rest_framework.filters.OrderingFilter',
-    ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-}
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -71,27 +51,20 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'fitness_tracker.urls'
 
-# Add this if not already in settings.py
-import os
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'activities/templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.csrf',
-                'django.template.context_processors.static',
+                'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
-
-
 
 WSGI_APPLICATION = 'fitness_tracker.wsgi.application'
 
