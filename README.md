@@ -22,12 +22,13 @@ The API also provides activity summaries and metrics over time.
 
 Base URL:
 
-https://pricharddube.pythonanywhere.com/api/user/
+https://pricharddube.pythonanywhere.com/api/users/
 
 🛠️ Installation (local setup)
 # clone the repo
-git clone https://github.com/YOUR-USERNAME/fitness_tracker.git
-cd fitness_tracker
+git clone https://github.com/Prichard-1/API-TRACKER.git
+cd API-TRACKER
+cd fitness-tracker
 
 # create virtualenv
 python -m venv venv
