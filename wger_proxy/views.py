@@ -1,4 +1,3 @@
-from django.shortcuts import render
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,7 +8,7 @@ class ExerciseSearchView(APIView):
 
     def get(self, request):
         query = request.GET.get('q', '')
-        url = f"https://wger.de/api/v2/exercise/?language=2&limit=100"
+        url = "https://wger.de/api/v2/exercise/?language=2&limit=100"
         response = requests.get(url)
         data = response.json()
 
@@ -23,5 +22,13 @@ class ExerciseSearchView(APIView):
 
         return Response(filtered)
 
+class ExerciseRootView(APIView):
+    permission_classes = [AllowAny]
 
-# Create your views here.
+    def get(self, request):
+        return Response({
+            "message": "Welcome to the Exercise API",
+            "available_endpoints": {
+                "search": "/api/exercises/search/?q=bench"
+            }
+        })

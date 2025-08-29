@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from users.views import StatusView  #
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('activities.urls')),
-    path('api/', include('users.urls')),
+    path('api/users/', include('users.urls')),  # assuming user endpoints are wired
+    path('api/activities/', include('activities.urls')),
+    path('api/status/', StatusView.as_view(), name='api-status'),
+    path('api/exercises/', include('wger_proxy.urls')),
 
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

@@ -7,6 +7,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.db.models import Sum
+from rest_framework.views import APIView
+
+class StatusView(APIView):
+    def get(self, request):
+        return Response({'status': 'OK'})
+
 
 class ActivityViewSet(viewsets.ModelViewSet):
     serializer_class = ActivitySerializer

@@ -1,16 +1,15 @@
 from rest_framework import serializers
 from .models import Activity
-from django.contrib.auth.models import User
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Activity
-        fields = ['id', 'activity_type', 'duration', 'distance', 'calories_burned', 'date', 'user']
+        fields = '__all__'
         read_only_fields = ['user']
 
-class UserSerializer(serializers.ModelSerializer):
-    activities = ActivitySerializer(many=True, read_only=True)
-
-    class Meta:
-        model = User
-        fields = ['id', 'username', 'email', 'activities']
+    def validate(self, data):
+        required = ['activity_type', 'duration', 'date']
+        for field in required:
+            if not data.get(field):
+                raise serializers.ValidationError(f"{field} is required.")
+        return data
