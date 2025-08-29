@@ -22,7 +22,7 @@ The API also provides activity summaries and metrics over time.
 
 Base URL:
 
-https://YOUR-USERNAME.pythonanywhere.com/api/
+https://pricharddube.pythonanywhere.com/api/user/
 
 🛠️ Installation (local setup)
 # clone the repo
