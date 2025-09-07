@@ -2,10 +2,11 @@ from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
-from .models import Activity
-from .serializers import ActivitySerializer
+from .models import Activity, Goal, Plan
+from .serializers import ActivitySerializer, GoalSerializer, PlanSerializer
 from .permissions import IsOwnerOrReadOnly
 
+# ===== Activities =====
 class ActivityViewSet(viewsets.ModelViewSet):
     serializer_class = ActivitySerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
@@ -17,6 +18,7 @@ class ActivityViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class ActivitySummaryView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -32,3 +34,28 @@ class ActivitySummaryView(APIView):
             "total_distance": total_distance,
             "total_calories": total_calories
         })
+
+
+# ===== Goals =====
+class GoalViewSet(viewsets.ModelViewSet):
+    serializer_class = GoalSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Goal.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+# ===== Plans =====
+class PlanViewSet(viewsets.ModelViewSet):
+    serializer_class = PlanSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Plan.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
